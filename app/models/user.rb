@@ -6,15 +6,18 @@ class User < ApplicationRecord
 
          validates :nickname, presence: true
          
-         with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, } do
+         VALID_NAME_REGEX = /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ 
+          validates :last_name, format: {with: VALID_NAME_REGEX}, allow_blank: true
           validates :last_name, presence: true
+          validates :first_name, format: {with: VALID_NAME_REGEX}, allow_blank: true
           validates :first_name, presence: true
-         end
 
-         with_options presence: true, format: { with: /\A[ァ-ヶ]+\z/, } do
+         VALID_NAME_KANA_REGEX = /\A[ァ-ヶ]+\z/
+          validates :last_name_kana, format: { with: VALID_NAME_KANA_REGEX }, allow_blank: true 
           validates :last_name_kana, presence: true
+          validates :first_name_kana, format: { with: VALID_NAME_KANA_REGEX }, allow_blank: true 
           validates :first_name_kana, presence: true
-         end
+         
          
          validates :birthday, presence: true
 end
