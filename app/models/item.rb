@@ -20,10 +20,11 @@ class Item < ApplicationRecord
   validates :title,                      presence: true
   validates :explanation,                presence: true
   validates :category_id,                numericality: { other_than: 1 ,message: "can't be blank" }
-  validates :item_Status_id,             numericality: { other_than: 1 ,message: "can't be blank" }
+  validates :item_status_id,             numericality: { other_than: 1 ,message: "can't be blank" }
   validates :delivery_fee_id,            numericality: { other_than: 1 ,message: "can't be blank" }
   validates :prefecture_id,              numericality: { other_than: 1 ,message: "can't be blank" }
   validates :estimated_shipping_date_id, numericality: { other_than: 1 ,message: "can't be blank" }
   validates :price,                      presence: true
+  validates_inclusion_of :price, in:300..9999999
   validates :image,                      presence: true
 end
