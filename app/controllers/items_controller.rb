@@ -1,5 +1,4 @@
 class ItemsController < ApplicationController
-  before_action :move_to_signed_in, only: [:new]
 
   def index
     @items = Item.order('created_at DESC')
@@ -25,7 +24,4 @@ class ItemsController < ApplicationController
                                  :estimated_shipping_date_id, :price, :image).merge(user_id: current_user.id)
   end
 
-  def move_to_signed_in
-    redirect_to '/users/sign_in' unless user_signed_in?
-  end
 end
