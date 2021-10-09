@@ -35,92 +35,92 @@ RSpec.describe BuyDelivery, type: :model do
       it 'tokenが空だと保存できないこと' do
         @buy_delivery.token = nil
         @buy_delivery.valid?
-        expect(@buy_delivery.errors.full_messages).to include("Token can't be blank")
+        expect(@buy_delivery.errors.full_messages).to include("クレジットカード情報を入力してください")
       end
       it 'postal_codeが空だと保存できないこと' do
         @buy_delivery.postal_code = ''
         @buy_delivery.valid?
-        expect(@buy_delivery.errors.full_messages).to include("Postal code can't be blank")
+        expect(@buy_delivery.errors.full_messages).to include("郵便番号を入力してください")
       end
       it 'postal_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
         @buy_delivery.postal_code = '1234567'
         @buy_delivery.valid?
-        expect(@buy_delivery.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@buy_delivery.errors.full_messages).to include("郵便番号はハイフンを入れて入力して下さい")
       end
       it 'postal_codeが"2桁"ハイフン4桁の半角数値だと保存できないこと' do
         @buy_delivery.postal_code = '12-3456'
         @buy_delivery.valid?
-        expect(@buy_delivery.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@buy_delivery.errors.full_messages).to include("郵便番号はハイフンを入れて入力して下さい")
       end
       it 'postal_codeが"4桁"ハイフン4桁の半角数値だと保存できないこと' do
         @buy_delivery.postal_code = '1234-5678'
         @buy_delivery.valid?
-        expect(@buy_delivery.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@buy_delivery.errors.full_messages).to include("郵便番号はハイフンを入れて入力して下さい")
       end
       it 'postal_codeが3桁ハイフン"3桁"の半角数値だと保存できないこと' do
         @buy_delivery.postal_code = '123-456'
         @buy_delivery.valid?
-        expect(@buy_delivery.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@buy_delivery.errors.full_messages).to include("郵便番号はハイフンを入れて入力して下さい")
       end
       it 'postal_codeが3桁ハイフン"5桁"の半角数値だと保存できないこと' do
         @buy_delivery.postal_code = '123-45678'
         @buy_delivery.valid?
-        expect(@buy_delivery.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@buy_delivery.errors.full_messages).to include("郵便番号はハイフンを入れて入力して下さい")
       end
       it 'postal_codeが3桁ハイフン4桁の"全角数値"だと保存できないこと' do
         @buy_delivery.postal_code = '１２３-４５６７'
         @buy_delivery.valid?
-        expect(@buy_delivery.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@buy_delivery.errors.full_messages).to include("郵便番号はハイフンを入れて入力して下さい")
       end
       it 'prefectureを選択していないと保存できないこと' do
         @buy_delivery.prefecture_id = 1
         @buy_delivery.valid?
-        expect(@buy_delivery.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@buy_delivery.errors.full_messages).to include("都道府県を入力してください")
       end
       it 'cityが空だと保存できないこと' do
         @buy_delivery.city = ''
         @buy_delivery.valid?
-        expect(@buy_delivery.errors.full_messages).to include("City can't be blank")
+        expect(@buy_delivery.errors.full_messages).to include("市区町村を入力してください")
       end
       it 'addressが空だと保存できないこと' do
         @buy_delivery.address = ''
         @buy_delivery.valid?
-        expect(@buy_delivery.errors.full_messages).to include("Address can't be blank")
+        expect(@buy_delivery.errors.full_messages).to include("番地を入力してください")
       end
       it 'telephone_numberが空だと保存できないこと' do
         @buy_delivery.telephone_number = ''
         @buy_delivery.valid?
-        expect(@buy_delivery.errors.full_messages).to include("Telephone number can't be blank")
+        expect(@buy_delivery.errors.full_messages).to include("電話番号を入力してください")
       end
       it 'telephone_numberが9桁の半角数値だと保存できないこと' do
         @buy_delivery.telephone_number = '090123456'
         @buy_delivery.valid?
-        expect(@buy_delivery.errors.full_messages).to include("Telephone number is invalid")
+        expect(@buy_delivery.errors.full_messages).to include("電話番号は不正な値です")
       end
       it 'telephone_numberが12桁の半角数値だと保存できないこと' do
         @buy_delivery.telephone_number = '090123456789'
         @buy_delivery.valid?
-        expect(@buy_delivery.errors.full_messages).to include("Telephone number is invalid")
+        expect(@buy_delivery.errors.full_messages).to include("電話番号は不正な値です")
       end
       it 'telephone_numberが10桁以上11桁以下の"全角"数値だと保存できないこと' do
         @buy_delivery.telephone_number = '０９０１２３４５６７８'
         @buy_delivery.valid?
-        expect(@buy_delivery.errors.full_messages).to include("Telephone number is invalid")
+        expect(@buy_delivery.errors.full_messages).to include("電話番号は不正な値です")
       end
       it 'telephone_numberが10桁以上11桁以下の半角数値&ハイフンありだと保存できないこと' do
         @buy_delivery.telephone_number = '090-1234-5678'
         @buy_delivery.valid?
-        expect(@buy_delivery.errors.full_messages).to include("Telephone number is invalid")
+        expect(@buy_delivery.errors.full_messages).to include("電話番号は不正な値です")
       end
       it 'userが紐付いていないと保存できないこと' do
         @buy_delivery.user_id = nil
         @buy_delivery.valid?
-        expect(@buy_delivery.errors.full_messages).to include("User can't be blank")
+        expect(@buy_delivery.errors.full_messages).to include("Userを入力してください")
       end
       it 'itemが紐付いていないと保存できないこと' do
         @buy_delivery.item_id = nil
         @buy_delivery.valid?
-        expect(@buy_delivery.errors.full_messages).to include("Item can't be blank")
+        expect(@buy_delivery.errors.full_messages).to include("Itemを入力してください")
       end
     end
   end
