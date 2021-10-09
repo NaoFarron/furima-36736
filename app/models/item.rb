@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
   belongs_to       :user
-  has_one_attached :image
+  has_many_attached :images
   has_one :buy
 
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -19,5 +19,5 @@ class Item < ApplicationRecord
   validates :estimated_shipping_date_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :price, format: { with: /\A[0-9]+\z/, allow_blank: true }, inclusion: { in: 300..9_999_999, allow_blank: true },
                     presence: true
-  validates :image, presence: true
+  validates :images, presence: true
 end

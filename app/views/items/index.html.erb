@@ -133,7 +133,9 @@
           <li class='list'>
             <%= link_to item_path(item.id) do %>
             <div class='item-img-content'>
-              <%= image_tag item.image, class: "item-img" %>
+              <% item.images.first(1).each do |image| %>
+                <%= image_tag image, class: "item-img" %>
+              <% end %>
 
               <div class='sold-out'>
               <% if item.buy.present?%> 
@@ -149,7 +151,7 @@
               <div class='item-price'>
                 <span><%= item.price %>円<br><%= item.delivery_fee.name %></span>
                 <div class='star-btn'>
-                  <%= image_tag "star.png", class:"star-icon" %>
+                  <%= image_tag "star.png", class:"star-icons" %>
                   <span class='star-count'>0</span>
                 </div>
               </div>
