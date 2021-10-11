@@ -26,16 +26,19 @@ class BuysController < ApplicationController
   private
 
   def buy_params
-    params.require(:buy_delivery).permit(:postal_code, :prefecture_id, :city, :address, :building_name, :telephone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:buy_delivery).permit(:postal_code, :prefecture_id, :city, :address, :building_name, :telephone_number).merge(user_id: current_user.id, item_id: params[:item_id])#, token: params[:token])
   end
   
   def pay_item
-     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-     Payjp::Charge.create(
-       amount: @item[:price],  
-       card: buy_params[:token],    
-       currency: 'jpy'                 
-     )
+    redirect_to new_card_registration_path and return unless current_user.card_registration.present?
+      customer_token = current_user.card_registration.customer_token 
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"] 
+      customer_token = current_user.card_registration.customer_token 
+      Payjp::Charge.create(
+      amount: @item.price, 
+      customer: customer_token, 
+      currency: 'jpy' 
+      )
   end
 
   def set_item
