@@ -1,4 +1,4 @@
-const pay = () => {
+/*const pay = () => {
   Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
   if ( document.getElementById('button')){
     const submit = document.getElementById("button");
